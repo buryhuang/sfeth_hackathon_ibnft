@@ -96,8 +96,8 @@ contract IBModel is ERC721 {
 contract ModelingTaskQueue {
     IBModel _tasks;
 
-    function createTask(string memory taskDetailUri, string memory name, uint256 amount) payable public {
-        require(msg.value == amount);
+    function createTask(string memory taskDetailUri, string memory name, uint256 amount) external payable {
+        payable(this).call{value: msg.value}('');
         uint256 taskId = _tasks.createTask(address(this), taskDetailUri, name, amount);
     }
 
