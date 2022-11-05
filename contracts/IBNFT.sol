@@ -19,7 +19,7 @@ contract IBModel is ERC721 {
         TrainingState State;
     }
 
-    constructor() ERC721("Modeling TrainingTask", "MLTSK") public {  
+    constructor() ERC721("Intelligence Backed NFT", "IBNFT") public {  
     }
 
     Counters.Counter private _taskIds;
@@ -46,7 +46,7 @@ contract IBModel is ERC721 {
         return _taskMapping[taskId].State;
     }
 
-    function createTask(address owner, string memory taskDetailUri, string memory name, uint256 usdAmount) public returns (uint256) {
+    function createTask(address owner, string memory taskDetailUri, string memory name) public returns (uint256) {
         _taskIds.increment();
 
         uint256 newTaskId = _taskIds.current();
@@ -90,31 +90,5 @@ contract IBModel is ERC721 {
         _safeTransfer(msg.sender, owner, taskId, "");
         _taskMapping[taskId].State = TrainingState.REJECTED;
         emit TaskToRejected(msg.sender, taskId);
-    }
-}
-
-contract ModelingTaskQueue {
-    IBModel _tasks;
-
-    function createTask(string memory taskDetailUri, string memory name, uint256 amount) external payable {
-        payable(this).call{value: msg.value}('');
-        uint256 taskId = _tasks.createTask(address(this), taskDetailUri, name, amount);
-    }
-
-    // Labeller
-    function takeTask(uint256 taskId) public {
-        _tasks.takeTask(address(this), taskId);
-    }
-
-    function submitTask(uint256 taskId, string memory taskResultUrl) public {
-        _tasks.submitTask(address(this), taskId, taskResultUrl);
-    }
-    
-    function verifyTask(uint256 taskId) public {
-        _tasks.verifyTask(address(this), taskId);
-    }
-
-    function rejectTask(uint256 taskId) public {
-        _tasks.rejectTask(address(this), taskId);
     }
 }
