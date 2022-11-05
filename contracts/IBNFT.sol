@@ -1,8 +1,10 @@
 pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract IBModel is ERC721 {
+contract IBModel is ERC721, ERC721URIStorage {
     using Counters for Counters.Counter;
 
     // () = createTask => TODO
@@ -20,6 +22,19 @@ contract IBModel is ERC721 {
     }
 
     constructor() ERC721("Intelligence Backed NFT", "IBNFT") public {  
+    }
+
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
+    }
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return _taskMapping[tokenId].DetailUri;
     }
 
     Counters.Counter private _taskIds;
@@ -46,13 +61,12 @@ contract IBModel is ERC721 {
         return _taskMapping[taskId].State;
     }
 
-    function createTask(address owner, string memory taskDetailUri, string memory name) public returns (uint256) {
-        _taskIds.increment();
-
+    function createTask(address to, string memory uri, string memory name) public returns (uint256) {
         uint256 newTaskId = _taskIds.current();
-        _mint(owner, newTaskId);
+        _safeMint(to, newTaskId);
+        _setTokenURI(newTaskId, uri);
         _taskMapping[newTaskId].Name = name;
-        _taskMapping[newTaskId].DetailUri = taskDetailUri;
+        _taskMapping[newTaskId].DetailUri = uri;
         _taskMapping[newTaskId].State = TrainingState.TODO;
         emit TaskToTodo(msg.sender, newTaskId, name);
         return newTaskId;
