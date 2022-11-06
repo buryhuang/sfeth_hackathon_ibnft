@@ -23,17 +23,8 @@ export function Navigation() {
 		path: "/mint",
 		default: true
 	}, {
-		label: "Sell",
-		path: "/sell"
-	}, {
-		label: "Buy",
+		label: "User: Pay and Request",
 		path: "/buy"
-	}, {
-		label: "Bid",
-		path: "/bid"
-	}, {
-		label: "Accept Bid",
-		path: "/accept-bid"
 	}]
 
 	return (
