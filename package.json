@@ -13,6 +13,7 @@
     "@fortawesome/react-fontawesome": "^0.1.17",
     "@mui/lab": "^5.0.0-alpha.68",
     "@mui/material": "^5.4.2",
+    "@openzeppelin/contracts": "^4.7.3",
     "@rarible/connector": "~0.8.30",
     "@rarible/connector-beacon": "~0.8.30",
     "@rarible/connector-fcl": "~0.8.30",

@@ -95,10 +95,13 @@ export function MintPage() {
 											finishedUpdate = true;
 											setProgressText("Error getting NFT metadata.")
 										});
+										finishedUpdate = true;
 									}).catch((error) => {
 										console.log(error);
 										setProgressText("Error minting NFT.")
+										finishedUpdate = true;
 									});
+									finishedUpdate = true;
 								}
 
 								return <RequestResult
