@@ -37,7 +37,7 @@ export function BuyPrepareForm({ disabled, onComplete }: IBuyPrepareFormProps) {
 			})}
 			>
 				<Stack spacing={2}>
-					<FormTextInput form={form} name="orderId" label="Order ID"/>
+					<FormTextInput form={form} name="orderId" label="Model Token ID"/>
 					<Box>
 						<FormSubmit
 							form={form}

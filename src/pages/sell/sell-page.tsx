@@ -58,7 +58,7 @@ export function SellPage() {
 									completeRender={(data) =>
 										<>
 											<Box sx={{ my: 2 }}>
-												<Typography variant="overline">Order ID:</Typography>
+												<Typography variant="overline">Model Token ID:</Typography>
 												<div>
 													<InlineCode wrap>{data}</InlineCode> <CopyToClipboard value={data}/>
 												</div>

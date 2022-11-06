@@ -27,11 +27,11 @@ export function BuyPage() {
                     <UnsupportedBlockchainWarning blockchain={blockchain}/>
                 </CommentedBlock>
 			}
-			<CommentedBlock sx={{ my: 2 }} comment={<BuyComment/>}>
+			<CommentedBlock sx={{ my: 2 }} comment={""}>
 				<FormStepper
 					steps={[
 						{
-							label: "Get Order Info",
+							label: "Request Use of the Model to Generate Images",
 							render: (onComplete) => {
 								return <BuyPrepareForm
 									onComplete={onComplete}

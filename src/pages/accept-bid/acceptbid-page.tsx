@@ -31,7 +31,7 @@ export function AcceptBidPage() {
 				<FormStepper
 					steps={[
 						{
-							label: "Get Order Info",
+							label: "Request Use of the Model to Generate Images",
 							render: (onComplete) => {
 								return <AcceptBidPrepareForm
 									onComplete={onComplete}
