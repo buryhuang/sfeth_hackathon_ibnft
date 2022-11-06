@@ -61,6 +61,14 @@ contract IBModel is ERC721, ERC721URIStorage {
         return _taskMapping[taskId].State;
     }
 
+    function getTaskName(uint256 taskId) public view returns(string memory) {
+        return _taskMapping[taskId].Name;
+    }
+
+    function getTaskResultUri(uint256 taskId) public view returns(string memory) {
+        return _taskMapping[taskId].ResultUri;
+    }
+
     function createTask(address to, string memory uri, string memory name) public returns (uint256) {
         uint256 newTaskId = _taskIds.current();
         _safeMint(to, newTaskId);
