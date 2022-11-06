@@ -25,6 +25,7 @@ export function ConnectionStatus() {
 
 	switch (connection?.state.status) {
 		case "connected":
+			localStorage.setItem("connected_address", connection.state.connection.address);
 			return <Alert severity="success" icon={<Icon icon={faLink}/>}>
 				<AlertTitle>Current Status: connected</AlertTitle>
 				Application is connected to wallet

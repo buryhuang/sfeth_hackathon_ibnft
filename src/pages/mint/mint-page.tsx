@@ -60,6 +60,8 @@ export function MintPage() {
 								console.log(lastResponse)
 
 								const metadataUri = localStorage.getItem('metadata_ipfs_uri')
+								const connectedAddress = localStorage.getItem('connected_address')
+
 								console.log("metadata_ipfs_uri:", metadataUri);
 								if (!finishedUpdate) {
 									fetch(
@@ -70,27 +72,28 @@ export function MintPage() {
 									).then((itemMeta) => {
 										return itemMeta.json();
 									}).then((nftInfo) => {
-										nftInfo['metadata_uri'] = metadataUri
+										nftInfo['metadata_uri'] = metadataUri;
+										nftInfo['owner'] = connectedAddress;
 										console.log(JSON.stringify(nftInfo))
-										setProgressText("Finished minted NFT.")
-										// fetch(
-										// 'https://r21a7bair0.execute-api.us-east-1.amazonaws.com/hack',
-										// {
-										// 	method: 'PUT',
-										// 	headers: {
-										// 		'Content-Type': 'application/json'
-										// 	},
-										// 	body: JSON.stringify(nftInfo)
-										// }).then((mintResponse) => {
-										// 	return mintResponse.json()
-										// }).then((result) => {
-										// 	console.log(result)
-										// 	finishedUpdate = true
-										// 	setProgressText("Finished minted NFT.")
-										// }).catch((error) => {
-										// 	console.log(error);
-										// 	setProgressText("Error getting NFT metadata.")
-										// });
+										setProgressText("Minting NFT with info: " + JSON.stringify(nftInfo));
+										fetch(
+										'https://r21a7bair0.execute-api.us-east-1.amazonaws.com/hack',
+										{
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(nftInfo)
+										}).then((mintResponse) => {
+											return mintResponse.json();
+										}).then((result) => {
+											console.log(result)
+											finishedUpdate = true;
+											setProgressText("Finished minted NFT: " + result);
+										}).catch((error) => {
+											console.log(error);
+											setProgressText("Error getting NFT metadata.")
+										});
 									}).catch((error) => {
 										console.log(error);
 										setProgressText("Error minting NFT.")
@@ -116,7 +119,7 @@ export function MintPage() {
 											<Box sx={{ my: 2 }}>
 												<Typography variant="overline">View In Polyscan:</Typography>
 												<div>
-													<a href='https://rarible.com/artsio'>https://mumbai.polygonscan.com/</a>
+													<a href='https://mumbai.polygonscan.com'>https://mumbai.polygonscan.com</a>
 												</div>
 											</Box>
 											<Card>

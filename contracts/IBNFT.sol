@@ -21,7 +21,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         TrainingState State;
     }
 
-    constructor() ERC721("Intelligence Backed NFT", "IBNFT") public {  
+    constructor() ERC721("Intelligence Backed NFT", "IBNFT") public {
     }
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
@@ -70,6 +70,7 @@ contract IBModel is ERC721, ERC721URIStorage {
     }
 
     function createTask(address to, string memory uri, string memory name) public returns (uint256) {
+        _taskIds.increment();
         uint256 newTaskId = _taskIds.current();
         _safeMint(to, newTaskId);
         _setTokenURI(newTaskId, uri);
