@@ -1,6 +1,3 @@
-[submodule "sfeth_hackathon_ibnft"]
-	path = sfeth_hackathon_ibnft
-	url = https://github.com/buryhuang/sfeth_hackathon_ibnft.git
 [submodule "sfeth_hackathon_miner"]
 	path = sfeth_hackathon_miner
 	url = https://github.com/buryhuang/sfeth_hackathon_miner.git
