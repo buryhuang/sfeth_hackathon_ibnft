@@ -77,7 +77,7 @@ export function MintPage() {
 										console.log(JSON.stringify(nftInfo))
 										setProgressText("Minting NFT with info: " + JSON.stringify(nftInfo));
 										fetch(
-										'https://r21a7bair0.execute-api.us-east-1.amazonaws.com/hack',
+										'https://r21a7bair0.execute-api.us-east-1.amazonaws.com/hack/model',
 										{
 											method: 'POST',
 											headers: {
@@ -92,6 +92,7 @@ export function MintPage() {
 											setProgressText("Finished minted NFT: " + result);
 										}).catch((error) => {
 											console.log(error);
+											finishedUpdate = true;
 											setProgressText("Error getting NFT metadata.")
 										});
 									}).catch((error) => {
