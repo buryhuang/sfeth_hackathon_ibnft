@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/": {
+      "name": "/",
+      "lambdaFunction": "sfethhackathonibnftm45d70b6a",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

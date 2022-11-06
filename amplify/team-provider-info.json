@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sfethhackathonibnftm-dev-21834-authRole",
+      "UnauthRoleArn": "arn:aws:iam::040064753767:role/amplify-sfethhackathonibnftm-dev-21834-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::040064753767:role/amplify-sfethhackathonibnftm-dev-21834-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-sfethhackathonibnftm-dev-21834-deployment",
+      "UnauthRoleName": "amplify-sfethhackathonibnftm-dev-21834-unauthRole",
+      "StackName": "amplify-sfethhackathonibnftm-dev-21834",
+      "StackId": "arn:aws:cloudformation:us-east-1:040064753767:stack/amplify-sfethhackathonibnftm-dev-21834/d3f6e870-5cea-11ed-a3bf-12bb338e0de1",
+      "AmplifyAppId": "d2npjbqsiuw6xn"
+    },
+    "categories": {
+      "function": {
+        "sfethhackathonibnftm45d70b6a": {
+          "deploymentBucketName": "amplify-sfethhackathonibnftm-dev-21834-deployment",
+          "s3Key": "amplify-builds/sfethhackathonibnftm45d70b6a-426f4b71776d357a5457-build.zip"
+        }
+      },
+      "api": {
+        "api8cd3c7c4": {}
+      }
+    }
+  }
+}

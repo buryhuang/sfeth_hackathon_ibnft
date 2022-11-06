@@ -1,10 +1,16 @@
 pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+<<<<<<< HEAD
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract IBModel is ERC721, ERC721URIStorage {
+=======
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+contract IBModel is ERC721 {
+>>>>>>> 623ee01 (Deploy post API to call NFTStorgae use amplify)
     using Counters for Counters.Counter;
 
     // () = createTask => TODO
@@ -21,6 +27,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         TrainingState State;
     }
 
+<<<<<<< HEAD
     constructor() ERC721("Intelligence Backed NFT", "IBNFT") public {  
     }
 
@@ -35,6 +42,9 @@ contract IBModel is ERC721, ERC721URIStorage {
         returns (string memory)
     {
         return _taskMapping[tokenId].DetailUri;
+=======
+    constructor() ERC721("Modeling TrainingTask", "MLTSK") public {  
+>>>>>>> 623ee01 (Deploy post API to call NFTStorgae use amplify)
     }
 
     Counters.Counter private _taskIds;
@@ -61,6 +71,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         return _taskMapping[taskId].State;
     }
 
+<<<<<<< HEAD
     function getTaskName(uint256 taskId) public view returns(string memory) {
         return _taskMapping[taskId].Name;
     }
@@ -75,6 +86,15 @@ contract IBModel is ERC721, ERC721URIStorage {
         _setTokenURI(newTaskId, uri);
         _taskMapping[newTaskId].Name = name;
         _taskMapping[newTaskId].DetailUri = uri;
+=======
+    function createTask(address owner, string memory taskDetailUri, string memory name, uint256 usdAmount) public returns (uint256) {
+        _taskIds.increment();
+
+        uint256 newTaskId = _taskIds.current();
+        _mint(owner, newTaskId);
+        _taskMapping[newTaskId].Name = name;
+        _taskMapping[newTaskId].DetailUri = taskDetailUri;
+>>>>>>> 623ee01 (Deploy post API to call NFTStorgae use amplify)
         _taskMapping[newTaskId].State = TrainingState.TODO;
         emit TaskToTodo(msg.sender, newTaskId, name);
         return newTaskId;
@@ -114,3 +134,32 @@ contract IBModel is ERC721, ERC721URIStorage {
         emit TaskToRejected(msg.sender, taskId);
     }
 }
+<<<<<<< HEAD
+=======
+
+contract ModelingTaskQueue {
+    IBModel _tasks;
+
+    function createTask(string memory taskDetailUri, string memory name, uint256 amount) payable public {
+        require(msg.value == amount);
+        uint256 taskId = _tasks.createTask(address(this), taskDetailUri, name, amount);
+    }
+
+    // Labeller
+    function takeTask(uint256 taskId) public {
+        _tasks.takeTask(address(this), taskId);
+    }
+
+    function submitTask(uint256 taskId, string memory taskResultUrl) public {
+        _tasks.submitTask(address(this), taskId, taskResultUrl);
+    }
+    
+    function verifyTask(uint256 taskId) public {
+        _tasks.verifyTask(address(this), taskId);
+    }
+
+    function rejectTask(uint256 taskId) public {
+        _tasks.rejectTask(address(this), taskId);
+    }
+}
+>>>>>>> 623ee01 (Deploy post API to call NFTStorgae use amplify)

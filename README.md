@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # IBNFT Tools for Rarible
 
 ## Install
@@ -60,3 +61,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Known issues
 
 * Sale/Bid may not work correctly on non-ethereum blockchains due to incorrect currencies setup
+=======
+# sfeth_hackathon_ibnft
+>>>>>>> 623ee01 (Deploy post API to call NFTStorgae use amplify)
