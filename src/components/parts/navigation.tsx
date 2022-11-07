@@ -19,12 +19,15 @@ export function Navigation() {
 	// 	path: "/deploy"
 	// },
 		{
-		label: "Creator: Mint Model Token",
+		label: "Publisher: Mint Model Token",
 		path: "/mint",
 		default: true
 	}, {
 		label: "User: Pay and Request",
 		path: "/buy"
+	}, {
+		label: "Miner: Process Tasks & Generate Images",
+		path: "/bid"
 	}]
 
 	return (

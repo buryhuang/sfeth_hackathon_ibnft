@@ -12,7 +12,7 @@ import { RequestResult } from "../../components/common/request-result"
 
 interface IBuyPrepareFormProps {
 	disabled?: boolean
-	onComplete: (response: PrepareFillResponse) => void
+	onComplete: (response: boolean) => void
 }
 
 export function BuyPrepareForm({ disabled, onComplete }: IBuyPrepareFormProps) {
@@ -27,10 +27,31 @@ export function BuyPrepareForm({ disabled, onComplete }: IBuyPrepareFormProps) {
 				if (!connection.sdk) {
 					return
 				}
+
+				console.log(formData.modelId, formData.prompt)
+
+				fetch(
+					`https://r21a7bair0.execute-api.us-east-1.amazonaws.com/hack/model/1/request`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							prompt: formData.prompt,
+						})
+					}).then((mintResponse) => {
+					return mintResponse.json();
+				}).then((result) => {
+					console.log(result)
+					// setProgressText("Finished minted NFT: " + result);
+				}).catch((error) => {
+					console.log(error);
+					// setProgressText("Error getting NFT metadata.")
+				});
+
 				try {
-					onComplete(await connection.sdk.order.buy({
-						orderId: toOrderId(formData.orderId)
-					}))
+					onComplete(true)
 				} catch (e) {
 					setError(e)
 				}
@@ -38,6 +59,7 @@ export function BuyPrepareForm({ disabled, onComplete }: IBuyPrepareFormProps) {
 			>
 				<Stack spacing={2}>
 					<FormTextInput form={form} name="orderId" label="Model Token ID"/>
+					<FormTextInput form={form} name="prompt" label="Prompt"/>
 					<Box>
 						<FormSubmit
 							form={form}

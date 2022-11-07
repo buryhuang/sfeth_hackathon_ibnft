@@ -21,7 +21,7 @@ export function BuyPage() {
 	const blockchain = connection.sdk?.wallet?.blockchain
 
 	return (
-		<Page header="Buy Token">
+		<Page header="Request Use of the Model to Generate Images">
 			{
 				!validateConditions(blockchain) && <CommentedBlock sx={{ my: 2 }}>
                     <UnsupportedBlockchainWarning blockchain={blockchain}/>

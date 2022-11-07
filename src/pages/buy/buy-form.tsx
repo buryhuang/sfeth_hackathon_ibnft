@@ -28,26 +28,24 @@ export function BuyForm({ prepare, disabled, onComplete }: IBuyFormProps) {
 				}
 
 				try {
-					onComplete(await prepare.submit({
-						amount: parseInt(formData.amount)
-					}))
+					onComplete(true)
 				} catch (e) {
 					setError(e)
 				}
 			})}
 			>
 				<Stack spacing={2}>
-					<FormTextInput
-						type="number"
-						inputProps={{ min: 1, max: prepare.maxAmount, step: 1 }}
-						form={form}
-						options={{
-							min: 1,
-							max: Number(prepare.maxAmount)
-						}}
-						name="amount"
-						label="Amount"
-					/>
+					{/*<FormTextInput*/}
+					{/*	type="number"*/}
+					{/*	inputProps={{ min: 1, max: prepare.maxAmount, step: 1 }}*/}
+					{/*	form={form}*/}
+					{/*	options={{*/}
+					{/*		min: 1,*/}
+					{/*		max: Number(prepare.maxAmount)*/}
+					{/*	}}*/}
+					{/*	name="amount"*/}
+					{/*	label="Amount"*/}
+					{/*/>*/}
 					<Box>
 						<FormSubmit
 							form={form}

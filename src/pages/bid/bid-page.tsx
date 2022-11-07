@@ -22,17 +22,17 @@ export function BidPage() {
 	const blockchain = connection.sdk?.wallet?.blockchain
 
 	return (
-		<Page header="Make Bid">
+		<Page header="Miner: Process Request & Generate Images">
 			{
 				!validateConditions(blockchain) && <CommentedBlock sx={{ my: 2 }}>
                     <UnsupportedBlockchainWarning blockchain={blockchain}/>
                 </CommentedBlock>
 			}
-			<CommentedBlock sx={{ my: 2 }} comment={<BidComment/>}>
+			<CommentedBlock sx={{ my: 2 }} comment={""}>
 				<FormStepper
 					steps={[
 						{
-							label: "Get Item Info",
+							label: "Get Task To Process",
 							render: (onComplete) => {
 								return <BidPrepareForm
 									onComplete={onComplete}

@@ -38,7 +38,7 @@ export function BidPrepareForm({ disabled, onComplete }: IBidPrepareFormProps) {
 			})}
 			>
 				<Stack spacing={2}>
-					<FormTextInput form={form} name="itemId" label="Item ID"/>
+					<FormTextInput form={form} name="itemId" label="Model ID"/>
 					<Box>
 						<FormSubmit
 							form={form}

@@ -691,6 +691,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         string DetailUri;
         string ResultUri;
         TrainingState State;
+        string Prompt;
     }
 
     constructor() ERC721("Intelligence Backed NFT", "IBNFT") public {
@@ -714,6 +715,7 @@ contract IBModel is ERC721, ERC721URIStorage {
     mapping(uint256 => TrainingTask) _taskMapping;
 
     event TaskToTodo(address creator, uint256 taskId, string name);
+    event PromptRequestCreated(address creator, uint256 modelId, string prompt);
     event TaskToInProgress(address creator, uint256 taskId);
     event TaskToReview(address creator, uint256 taskId);
     event TaskToVerified(address creator, uint256 taskId);
@@ -745,7 +747,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         return _taskIds.current();
     }
 
-    function createTask(address to, string memory uri, string memory name) public returns (uint256) {
+    function createModel(address to, string memory uri, string memory name) public returns (uint256) {
         _taskIds.increment();
         uint256 newTaskId = _taskIds.current();
         _safeMint(to, newTaskId);
@@ -757,16 +759,21 @@ contract IBModel is ERC721, ERC721URIStorage {
         return newTaskId;
     }
 
-    function takeTask(address owner, uint256 taskId) OnlyTaskInState2(taskId, TrainingState.TODO, TrainingState.REJECTED) public {
+    function createPromptRequest(uint256 modelId, string memory prompt) public {
+        _taskMapping[modelId].Prompt = prompt;
+        emit PromptRequestCreated(msg.sender, modelId, prompt);
+    }
+
+    function takeTask(address owner, uint256 taskId) public {
         
-        require(balanceOf(msg.sender) == 0, "Sender has alrady taken one task.");
+        
         require(_taskMapping[taskId].State == TrainingState.TODO || _taskMapping[taskId].State == TrainingState.REJECTED, "TrainingTask must be in TODO or REJECTED state to be taken.");
         _safeTransfer(owner, msg.sender, taskId, "");
         _taskMapping[taskId].State = TrainingState.IN_PROGRESS;
         emit TaskToInProgress(msg.sender, taskId);
     }
 
-    function submitTask(address owner, uint256 taskId, string memory resultUri) OnlyTaskInState(taskId, TrainingState.IN_PROGRESS) public {
+    function submitTask(address owner, uint256 taskId, string memory resultUri) public {
         
         require(ownerOf(taskId) == msg.sender);
         _taskMapping[taskId].ResultUri = resultUri;
@@ -775,7 +782,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         emit TaskToReview(msg.sender, taskId);
     }
 
-    function verifyTask(address owner, uint256 taskId) OnlyTaskInState(taskId, TrainingState.IN_REVIEW) public {
+    function verifyTask(address owner, uint256 taskId) public {
         
         require(ownerOf(taskId) == msg.sender);
         _safeTransfer(msg.sender, owner, taskId, "");
@@ -783,7 +790,7 @@ contract IBModel is ERC721, ERC721URIStorage {
         emit TaskToVerified(msg.sender, taskId);
     }
 
-    function rejectTask(address owner, uint256 taskId) OnlyTaskInState(taskId, TrainingState.IN_REVIEW) public {
+    function rejectTask(address owner, uint256 taskId) public {
         
         require(ownerOf(taskId) == msg.sender);
         _safeTransfer(msg.sender, owner, taskId, "");

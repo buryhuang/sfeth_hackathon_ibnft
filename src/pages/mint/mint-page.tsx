@@ -26,7 +26,7 @@ export function MintPage() {
 	let finishedUpdate = false;
 
 	return (
-		<Page header="Creator: Mint Model Token">
+		<Page header="Publisher: Mint Model Token">
 			{
 				!validateConditions(blockchain) && <CommentedBlock sx={{ my: 2 }}>
                     <UnsupportedBlockchainWarning blockchain={blockchain}/>
@@ -89,11 +89,11 @@ export function MintPage() {
 										}).then((result) => {
 											console.log(result)
 											finishedUpdate = true;
-											setProgressText("Finished minted NFT: " + result);
+											// setProgressText("Finished minted NFT: " + result);
 										}).catch((error) => {
 											console.log(error);
 											finishedUpdate = true;
-											setProgressText("Error getting NFT metadata.")
+											// setProgressText("Error getting NFT metadata.")
 										});
 										finishedUpdate = true;
 									}).catch((error) => {
@@ -108,18 +108,18 @@ export function MintPage() {
 									result={{ type: "complete", data: lastResponse }}
 									completeRender={(data) =>
 										<>
-											<Box sx={{ my: 2 }}>
-												<Typography variant="overline">Type:</Typography>
-												<div>
-													<InlineCode wrap>{data.type}</InlineCode>
-												</div>
-											</Box>
-											<Box sx={{ my: 2 }}>
-												<Typography variant="overline">Item ID:</Typography>
-												<div>
-													<InlineCode wrap>{data.itemId}</InlineCode> <CopyToClipboard value={data.itemId}/>
-												</div>
-											</Box>
+											{/*<Box sx={{ my: 2 }}>*/}
+											{/*	<Typography variant="overline">Type:</Typography>*/}
+											{/*	<div>*/}
+											{/*		<InlineCode wrap>{data.type}</InlineCode>*/}
+											{/*	</div>*/}
+											{/*</Box>*/}
+											{/*<Box sx={{ my: 2 }}>*/}
+											{/*	<Typography variant="overline">Item ID:</Typography>*/}
+											{/*	<div>*/}
+											{/*		<InlineCode wrap>{data.itemId}</InlineCode> <CopyToClipboard value={data.itemId}/>*/}
+											{/*	</div>*/}
+											{/*</Box>*/}
 											<Box sx={{ my: 2 }}>
 												<Typography variant="overline">View In Polyscan:</Typography>
 												<div>
